@@ -1,5 +1,0 @@
-month,isp_id,selected_vendor,purchase_quantity,min_quality_score
-0,isp1,vendor1,50,0.7
-0,isp2,vendor1,50,0.7
-1,isp1,vendor2,50,0.7
-1,isp2,vendor2,50,0.7

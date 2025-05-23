@@ -33,14 +33,12 @@ Make decisions about:
 1. Product pricing (adjust current prices by a percentage)
 2. Marketing investments (allocate budget)
 3. R&D investments (allocate budget)
-4. Production levels (set target)
 
 Your response MUST be a valid JSON object with these exact keys:
 {{
     "price_adjustment": <float between -0.2 and 0.2>,
     "marketing_budget": <integer between 10000 and 50000>,
-    "rd_budget": <integer between 10000 and 50000>,
-    "production_target": <integer between 100 and 1000>
+    "rd_budget": <integer between 10000 and 50000>
 }}"""
 )
 
@@ -63,13 +61,13 @@ isp_decision_template = PromptTemplate(
 
 Make decisions about:
 1. Which vendor to purchase from (vendor1 or vendor2)
-2. How many units to purchase (based on your budget)
+2. How many units to purchase (based on your budget and number of customers)
 3. Quality requirements (minimum acceptable score)
 
 Your response MUST be a valid JSON object with these exact keys:
 {{
     "selected_vendor": "vendor1" or "vendor2",
-    "purchase_quantity": <integer between 1 and 100>,
+    "purchase_quantity": <integer>,
     "min_quality_score": <float between 0 and 1>
 }}"""
 )

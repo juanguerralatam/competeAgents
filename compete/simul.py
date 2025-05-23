@@ -181,9 +181,6 @@ class Simulation:
         vendor.state.current_state['salary_rd'] = decision.get('rd_budget', vendor.state.current_state['salary_rd'])
         vendor.state.current_state['salary_maketing'] = decision.get('marketing_budget', vendor.state.current_state['salary_maketing'])
         
-        # Update production target
-        vendor.state.current_state['production_target'] = decision.get('production_target', 0)
-        
     def _apply_isp_decision(self, isp: ISPAgent, decision: Dict[str, Any]):
         """Apply ISP decision and log it"""
         # Log and store decision

@@ -9,8 +9,6 @@ class MarketAnalysisTool(BaseTool):
         """Analyze market data and return insights"""
         products = market_data.get('products', [])
         prices = market_data.get('prices', [])
-        market_share = market_data.get('market_share', 0)
-        cash_flow = market_data.get('cash_flow', 0)
         
         # Basic analysis
         avg_price = sum(prices) / len(prices) if prices else 0
@@ -19,14 +17,50 @@ class MarketAnalysisTool(BaseTool):
         
         return {
             'average_price': avg_price,
-            'profit_margin': profit_margin,
-            'market_position': 'growing' if market_share > 100 else 'stable' if market_share > 0 else 'new',
-            'financial_health': 'strong' if cash_flow > 70000 else 'moderate' if cash_flow > 40000 else 'limited',
-            'recommendation': 'expand' if profit_margin > 0.4 and cash_flow > 60000 else 'maintain' if profit_margin > 0.2 else 'restructure'
-        }
+            'profit_margin': profit_margin}
         
     async def _arun(self, market_data: Dict[str, Any]) -> Dict[str, Any]:
         return self._run(market_data)
+    
+class StrategyPlanningTool(BaseTool):
+    name: str = "strategy_planning"
+    description: str = "Plan and update business strategies"
+    
+    def _run(self, strategy_data: Dict[str, Any]) -> Dict[str, Any]:
+        """Plan and update business strategies"""
+        current_state = strategy_data.get('current_state', {})
+        market_analysis = strategy_data.get('market_analysis', {})
+        plan = strategy_data.get('plan', 'cost_leadership')
+        
+        # Basic strategy recommendations based on plan type
+        if plan == 'cost_leadership':
+            return {
+                'focus': 'operational_efficiency',
+                'pricing_strategy': 'competitive_pricing',
+                'market_approach': 'mass_market',
+                'production_recommendation': 'scale_up',
+                'next_steps': [
+                    'Optimize production costs',
+                    'Increase production volume',
+                    'Expand market reach'
+                ]
+            }
+        else:  # cost_focus
+            return {
+                'focus': 'product_differentiation',
+                'pricing_strategy': 'value_based_pricing',
+                'market_approach': 'niche_market',
+                'production_recommendation': 'quality_over_quantity',
+                'next_steps': [
+                    'Enhance product features',
+                    'Target specific customer segments',
+                    'Invest in brand development'
+                ]
+            }
+        
+    async def _arun(self, strategy_data: Dict[str, Any]) -> Dict[str, Any]:
+        return self._run(strategy_data)
+    
 
 class PortfolioAnalysisTool(BaseTool):
     name: str = "portfolio_analysis"
@@ -73,53 +107,8 @@ class PortfolioAnalysisTool(BaseTool):
         composite_score = product_score * 0.5 + marketing_score * 0.3 + rd_score * 0.2
         
         return {
-            'product_diversity': len(products),
-            'price_point': 'premium' if avg_price > 150 else 'standard' if avg_price > 90 else 'budget',
-            'profit_margin': margin,
-            'marketing_quality': marketing_score,
-            'innovation_potential': rd_score,
             'score': round(composite_score, 2),
-            'recommendation': 'recommended' if composite_score > 0.6 else 'acceptable' if composite_score > 0.4 else 'needs improvement'
-        }
+            }
         
     async def _arun(self, portfolio_data: Dict[str, Any]) -> Dict[str, Any]:
         return self._run(portfolio_data)
-
-class StrategyPlanningTool(BaseTool):
-    name: str = "strategy_planning"
-    description: str = "Plan and update business strategies"
-    
-    def _run(self, strategy_data: Dict[str, Any]) -> Dict[str, Any]:
-        """Plan and update business strategies"""
-        current_state = strategy_data.get('current_state', {})
-        market_analysis = strategy_data.get('market_analysis', {})
-        plan = strategy_data.get('plan', 'cost_leadership')
-        
-        # Basic strategy recommendations based on plan type
-        if plan == 'cost_leadership':
-            return {
-                'focus': 'operational_efficiency',
-                'pricing_strategy': 'competitive_pricing',
-                'market_approach': 'mass_market',
-                'production_recommendation': 'scale_up',
-                'next_steps': [
-                    'Optimize production costs',
-                    'Increase production volume',
-                    'Expand market reach'
-                ]
-            }
-        else:  # cost_focus
-            return {
-                'focus': 'product_differentiation',
-                'pricing_strategy': 'value_based_pricing',
-                'market_approach': 'niche_market',
-                'production_recommendation': 'quality_over_quantity',
-                'next_steps': [
-                    'Enhance product features',
-                    'Target specific customer segments',
-                    'Invest in brand development'
-                ]
-            }
-        
-    async def _arun(self, strategy_data: Dict[str, Any]) -> Dict[str, Any]:
-        return self._run(strategy_data)

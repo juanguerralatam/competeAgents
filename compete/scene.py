@@ -6,15 +6,14 @@ class MarketEnvironment:
         self.global_params = self._load_global_params()
         self.market_state = {
             'market_growth': {
-                'internet_grown': 0.0,
-                'economy_grown': 0.0
+                'internet_grown': 0.2,
+                'economy_grown': 0.2
             },
             'technological_advancement': {
-                'migration_fiber': 0.0
+                'migration_fiber': 0.2
             },
             'environmental_factors': {
-                'country': 'M',  # H, M, L
-                'city': 1,       # 1, 2
+                'country': 'H',  # H, M, L
                 'company_size': 'L'  # L, S
             }
         }

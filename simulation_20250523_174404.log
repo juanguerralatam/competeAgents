@@ -1,0 +1,9 @@
+2025-05-23 17:44:04,664 - INFO - Starting simulation 'juandavidf' for 3 months
+2025-05-23 17:44:04,664 - INFO - Simulation initialized with duration of 3 months
+2025-05-23 17:44:04,665 - INFO - Starting simulation
+2025-05-23 17:44:04,665 - INFO - Initializing agents...
+2025-05-23 17:44:04,719 - INFO - Initialized 2 vendors and 2 ISPs
+2025-05-23 17:44:04,721 - INFO - Running step 1/3
+2025-05-23 17:44:04,721 - INFO - Agent vendor1 used tool market_analysis
+2025-05-23 17:44:04,721 - INFO - Agent vendor1 used tool strategy_planning
+2025-05-23 17:44:04,913 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
