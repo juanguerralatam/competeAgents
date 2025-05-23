@@ -12,8 +12,9 @@ from agents.utils import LoggingUtils
 
 # Define vendor prompt templates
 vendor_system_template = PromptTemplate(
-    input_variables=["brand", "plan", "sales", "cash_flow", "products"],
+    input_variables=["description", "brand", "plan", "sales", "cash_flow", "products"],
     template="""You are a vendor agent in a competitive ONU device market.
+Your description: {description}
 Your current state:
 - Brand: {brand}
 - Strategy: {plan}
@@ -44,14 +45,15 @@ Your response MUST be a valid JSON object with these exact keys:
 
 # Define ISP prompt templates
 isp_system_template = PromptTemplate(
-    input_variables=["cash_flow", "buy", "min_quality_score"],
+    input_variables=["cash_flow", "buy", "min_quality_score", "country_development"],
     template="""You are an ISP agent purchasing ONU devices.
 Your current state:
 - Budget: {cash_flow}
 - Current purchases: {buy}
 - Quality requirements: {min_quality_score}
+- Country development: {country_development}
 
-Make decisions to optimize your purchases based on quality and cost."""
+Make decisions to optimize your purchases based on quality, cost, and your country's development level."""
 )
 
 isp_decision_template = PromptTemplate(
@@ -184,6 +186,7 @@ class VendorAgent(BaseAgent):
 
     def _get_system_prompt(self) -> str:
         return vendor_system_template.format(
+            description=self.state.current_state.get('description', ''),
             brand=self.state.current_state['brand'],
             plan=self.state.current_state['plan'],
             sales=self.state.current_state['sales'],
@@ -203,11 +206,21 @@ class VendorAgent(BaseAgent):
         )
         
     def make_decision(self) -> Dict[str, Any]:
-        """Compute analysis once, set required keys, and call common make_decision"""
+        """Compute analysis once, set required keys, and call common make_decision. R&D and marketing budgets depend on cash and capital, with a higher clamp for dynamic behavior."""
         self._required_keys = ['price_adjustment', 'marketing_budget', 'rd_budget']
-        # perform market analysis and strategy planning once
         self.market_analysis, self.strategy_plan = self._analyze_and_plan()
-        return super().make_decision()
+        cash = self.state.current_state.get('cash_flow', 0)
+        capital = self.state.current_state.get('capital', 0)
+        # More dynamic: R&D is 10% of cash + 2% of capital, marketing is 8% of cash + 1% of capital
+        rd_budget = int(0.10 * cash + 0.02 * capital)
+        marketing_budget = int(0.08 * cash + 0.01 * capital)
+        # Clamp to a higher max for large companies
+        rd_budget = max(10000, min(rd_budget, 200000))
+        marketing_budget = max(10000, min(marketing_budget, 200000))
+        decision = super().make_decision()
+        decision['rd_budget'] = rd_budget
+        decision['marketing_budget'] = marketing_budget
+        return decision
 
 class ISPAgent(BaseAgent):
     def __init__(self, agent_id: str, initial_state: Dict[str, Any]):
@@ -218,7 +231,8 @@ class ISPAgent(BaseAgent):
         return isp_system_template.format(
             cash_flow=self.state.current_state['cash_flow'],
             buy=self.state.current_state['buy'],
-            min_quality_score=self.state.current_state.get('min_quality_score', 0)
+            min_quality_score=self.state.current_state.get('min_quality_score', 0),
+            country_development=self.state.current_state.get('country_development', 1)
         )
         
     def _get_decision_prompt(self) -> str:
@@ -288,12 +302,53 @@ class ISPAgent(BaseAgent):
             if best_vendor is None:
                 best_vendor = vendors[0]
         selected_vendor = best_vendor.agent_id
-        budget = self.state.current_state.get('cash_flow', 0)
-        price = best_vendor.state.current_state['products'][0]['price'] if best_vendor.state.current_state['products'] else 1
-        purchase_quantity = max(1, int(budget / price))
-        min_quality_score = best_vendor.state.current_state.get('score_product', 0.5)
+        # Remove logic related to selling ONUs as it is not part of the revenue model
+        # Removed calculation of purchase_quantity and related logic
+        min_quality_score = best_vendor.state.current_state.get('score_product', 0.5) if best_vendor else 0.5
+
+        # Add affordability check for ISPs in low-development countries
+        country_development = self.state.current_state.get('country_development', 1)
+        if 'cost sensitive' in description and country_development < 0.5:
+            affordable_vendors = []
+            for v in vendors:
+                products = v.state.current_state.get('products', [])
+                if products:
+                    price = products[0].get('price', 1)
+                    if price <= self.state.current_state.get('cash_flow', 0):
+                        affordable_vendors.append(v)
+            if affordable_vendors:
+                best_vendor = min(affordable_vendors, key=lambda v: v.state.current_state['products'][0]['price'])
+            else:
+                best_vendor = None  # No affordable vendor found
+
+        # Introduce diversity in decision-making with randomness and weighting factors
+        import random
+        if 'cost sensitive' in description:
+            weighted_vendors = []
+            for v in vendors:
+                products = v.state.current_state.get('products', [])
+                if products:
+                    price = products[0].get('price', 1)
+                    quality = v.state.current_state.get('score_product', 0)
+                    affordability_score = max(0, self.state.current_state.get('cash_flow', 0) - price)
+                    weight = affordability_score * 0.7 + quality * 0.3  # Prioritize affordability
+                    weighted_vendors.append((v, weight))
+            if weighted_vendors:
+                best_vendor = max(weighted_vendors, key=lambda x: x[1])[0]
+            else:
+                best_vendor = None  # No suitable vendor found
+
+        # Ensure selected vendor aligns with affordability and randomness
+        if best_vendor is None or random.random() < 0.1:  # 10% chance to explore other options
+            best_vendor = random.choice(vendors) if vendors else None
+
+        if best_vendor is None or best_vendor.state.current_state['products'][0]['price'] > self.state.current_state.get('cash_flow', 0):
+            return {
+                'selected_vendor': None,  # No purchase possible
+                'min_quality_score': min_quality
+            }
+
         return {
             'selected_vendor': selected_vendor,
-            'purchase_quantity': purchase_quantity,
             'min_quality_score': min_quality_score
         }

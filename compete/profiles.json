@@ -9,8 +9,8 @@
         "variable_cost": 50000,
         "capital": 1000000,
         "cash_flow": 50000,
-        "salary_rd": 50000,
-        "salary_maketing": 30000,
+        "salary_rd": 30000,
+        "salary_maketing": 20000,
         "products": [
           {
             "name": "Basic ONU",
@@ -26,9 +26,9 @@
         "Updated_Yearly": true,
         "rival_info": {},
         "plan": "cost_leadership",
-        "analysis_portfolios": 0.5,
-        "score_product": 0.5,
-        "score_add": 0.5
+        "analysis_portfolios": 0.6,
+        "score_product": 0.6,
+        "score_add": 0.6
       }
     },
     {
@@ -39,7 +39,7 @@
         "fix_cost": 1200000,
         "variable_cost": 60000,
         "capital": 1200000,
-        "cash_flow": 60000,
+        "cash_flow": 600000,
         "salary_rd": 60000,
         "salary_maketing": 40000,
         "products": [
@@ -67,7 +67,8 @@
     {
       "agent_id": "isp1",
       "state": {
-        "description": "you are a large internet service proveider focus in premiun customer",
+        "description": "you are a large internet service provider focused on premium customers in a highly developed country",
+        "country_development": 0.9,
         "cash_flow": 5000000,
         "buy": 0,
         "analisys_porfolios": 0,
@@ -78,8 +79,129 @@
     {
       "agent_id": "isp2",
       "state": {
-        "description": "you are a small internet service proveider focus in cost sensitive customers",
+        "description": "you are a large internet service provider focused on business clients in a developed country",
+        "country_development": 0.6,
+        "cash_flow": 4000000,
+        "buy": 0,
+        "analisys_porfolios": 0,
+        "score_product": 0,
+        "score_add": 0
+      }
+    },
+    {
+      "agent_id": "isp3",
+      "state": {
+        "description": "you are a large internet service provider focused on urban and suburban residential customers in a moderately developed country",
+        "country_development": 0.3,
+        "cash_flow": 3000000,
+        "buy": 0,
+        "analisys_porfolios": 0,
+        "score_product": 0,
+        "score_add": 0
+      }
+    },
+    {
+      "agent_id": "isp4",
+      "state": {
+        "description": "you are a small internet service provider focused on cost-sensitive rural customers in a developing country",
+        "country_development": 0.9,
         "cash_flow": 50000,
+        "buy": 0,
+        "analisys_porfolios": 0,
+        "score_product": 0,
+        "score_add": 0
+      }
+    },
+    {
+      "agent_id": "isp5",
+      "state": {
+        "description": "you are a small internet service provider focused on students and young professionals in a developing country",
+        "country_development": 0.9,
+        "cash_flow": 60000,
+        "buy": 0,
+        "analisys_porfolios": 0,
+        "score_product": 0,
+        "score_add": 0
+      }
+    },
+    {
+      "agent_id": "isp6",
+      "state": {
+        "description": "you are a small internet service provider focused on small businesses in a moderately developed country",
+        "country_development": 0.9,
+        "cash_flow": 80000,
+        "buy": 0,
+        "analisys_porfolios": 0,
+        "score_product": 0,
+        "score_add": 0
+      }
+    },
+    {
+      "agent_id": "isp7",
+      "state": {
+        "description": "you are a small internet service provider focused on remote villages in a low development country",
+        "country_development": 0.6,
+        "cash_flow": 30000,
+        "buy": 0,
+        "analisys_porfolios": 0,
+        "score_product": 0,
+        "score_add": 0
+      }
+    },
+    {
+      "agent_id": "isp8",
+      "state": {
+        "description": "you are a small internet service provider focused on family households in a moderately developed country",
+        "country_development": 0.6,
+        "cash_flow": 90000,
+        "buy": 0,
+        "analisys_porfolios": 0,
+        "score_product": 0,
+        "score_add": 0
+      }
+    },
+    {
+      "agent_id": "isp9",
+      "state": {
+        "description": "you are a small internet service provider focused on digital nomads in a developing country",
+        "country_development": 0.6,
+        "cash_flow": 70000,
+        "buy": 0,
+        "analisys_porfolios": 0,
+        "score_product": 0,
+        "score_add": 0
+      }
+    },
+    {
+      "agent_id": "isp10",
+      "state": {
+        "description": "you are a small internet service provider focused on elderly customers in a moderately developed country",
+        "country_development": 0.3,
+        "cash_flow": 60000,
+        "buy": 0,
+        "analisys_porfolios": 0,
+        "score_product": 0,
+        "score_add": 0
+      }
+    },
+    {
+      "agent_id": "isp11",
+      "state": {
+        "description": "you are a small internet service provider focused on new housing developments in a developing country",
+        "country_development": 0.3,
+        "cash_flow": 55000,
+        "buy": 0,
+        "analisys_porfolios": 0,
+        "score_product": 0,
+        "score_add": 0
+      }
+    },
+    {
+      "agent_id": "isp12",
+      "state": {
+        "description": "you are a small internet service provider focused on tech startups in a moderately developed country",
+        "country_development": 0.3,
+        "cash_flow": 95000,
         "buy": 0,
         "analisys_porfolios": 0,
         "score_product": 0,

@@ -9,7 +9,7 @@ def main():
     parser = argparse.ArgumentParser(description='Run the Vendor-ISP Market Simulation')
     parser.add_argument('exp_name', type=str, help='Name of the experiment')
     parser.add_argument('--debug', action='store_true', help='Enable debug mode')
-    parser.add_argument('--duration', type=int, default=3, 
+    parser.add_argument('--duration', type=int, default=6, 
                        help='Duration of simulation in months (default: 3)')
     args = parser.parse_args()
 

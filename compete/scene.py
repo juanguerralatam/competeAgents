@@ -55,4 +55,4 @@ class MarketEnvironment:
         self.market_state['technological_advancement']['migration_fiber'] = self.global_params['technological_advancement']['migration_fiber']
         
         # TODO: Implement market state update logic
-        pass 
+        pass

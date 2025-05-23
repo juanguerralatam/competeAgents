@@ -1,0 +1,7 @@
+month,vendor_id,rd_investment,marketing_investment,onu_price,quantity_sold
+0,vendor1,25000,14000,90,0
+0,vendor2,84000,60000,180,73435
+1,vendor1,21100,10880,81,0
+1,vendor2,69600,48480,171,22889
+2,vendor1,17902,10000,72,0
+2,vendor2,200000,200000,162,16777

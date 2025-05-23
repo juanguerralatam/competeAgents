@@ -1,10 +1,11 @@
 
 ==================================================
-Timestamp: 2025-05-23 20:09:18
+Timestamp: 2025-05-23 23:06:07
 Agent: vendor1
 
 System Prompt:
 You are a vendor agent in a competitive ONU device market.
+Your description: you are a Born Global Company onu manufacter
 Your current state:
 - Brand: Vendor1
 - Strategy: cost_leadership
@@ -24,13 +25,14 @@ Make decisions to maximize your market share and profitability.
 Decision Prompt:
 Based on your current state and the following market conditions:
 {
+  "description": "you are a Born Global Company onu manufacter",
   "brand": "Vendor1",
   "fix_cost": 100000,
   "variable_cost": 50000,
   "capital": 1000000,
   "cash_flow": 50000,
-  "salary_rd": 50000,
-  "salary_maketing": 30000,
+  "salary_rd": 30000,
+  "salary_maketing": 20000,
   "products": [
     {
       "name": "Basic ONU",
@@ -82,27 +84,28 @@ LLM Response:
 ```json
 {
     "price_adjustment": -0.1,
-    "marketing_budget": 40000,
-    "rd_budget": 30000
+    "marketing_budget": 30000,
+    "rd_budget": 20000
 }
 ```
 ==================================================
 
 ==================================================
-Timestamp: 2025-05-23 20:09:32
+Timestamp: 2025-05-23 23:06:18
 Agent: vendor1
 
 System Prompt:
 You are a vendor agent in a competitive ONU device market.
+Your description: you are a Born Global Company onu manufacter
 Your current state:
 - Brand: Vendor1
 - Strategy: cost_leadership
-- Current sales: 515
-- Current cash flow: 50000
+- Current sales: 0
+- Current cash flow: 11000.0
 - Products: [
   {
     "name": "Basic ONU",
-    "price": 100,
+    "price": 90.0,
     "cost": 60,
     "description": "Entry-level ONU device"
   }
@@ -113,17 +116,18 @@ Make decisions to maximize your market share and profitability.
 Decision Prompt:
 Based on your current state and the following market conditions:
 {
+  "description": "you are a Born Global Company onu manufacter",
   "brand": "Vendor1",
   "fix_cost": 100000,
   "variable_cost": 50000,
   "capital": 1000000,
-  "cash_flow": 50000,
-  "salary_rd": 50000,
-  "salary_maketing": 30000,
+  "cash_flow": 11000.0,
+  "salary_rd": 25000,
+  "salary_maketing": 14000,
   "products": [
     {
       "name": "Basic ONU",
-      "price": 100,
+      "price": 90.0,
       "cost": 60,
       "description": "Entry-level ONU device"
     }
@@ -131,7 +135,7 @@ Based on your current state and the following market conditions:
   "content": "Basic marketing campaign",
   "income": 0,
   "expenses": 0,
-  "sales": 515,
+  "sales": 0,
   "Updated_Yearly": true,
   "rival_info": {},
   "plan": "cost_leadership",
@@ -139,8 +143,8 @@ Based on your current state and the following market conditions:
   "score_product": 0.5,
   "score_add": 0.5,
   "market_analysis": {
-    "average_price": 100.0,
-    "profit_margin": 0.4
+    "average_price": 90.0,
+    "profit_margin": 0.3333333333333333
   },
   "strategy_plan": {
     "focus": "operational_efficiency",
@@ -171,27 +175,28 @@ LLM Response:
 ```json
 {
     "price_adjustment": -0.1,
-    "marketing_budget": 40000,
-    "rd_budget": 30000
+    "marketing_budget": 30000,
+    "rd_budget": 20000
 }
 ```
 ==================================================
 
 ==================================================
-Timestamp: 2025-05-23 20:09:42
+Timestamp: 2025-05-23 23:06:32
 Agent: vendor1
 
 System Prompt:
 You are a vendor agent in a competitive ONU device market.
+Your description: you are a Born Global Company onu manufacter
 Your current state:
 - Brand: Vendor1
 - Strategy: cost_leadership
-- Current sales: 605
-- Current cash flow: 50000
+- Current sales: 0
+- Current cash flow: -20980.0
 - Products: [
   {
     "name": "Basic ONU",
-    "price": 100,
+    "price": 81.0,
     "cost": 60,
     "description": "Entry-level ONU device"
   }
@@ -202,17 +207,18 @@ Make decisions to maximize your market share and profitability.
 Decision Prompt:
 Based on your current state and the following market conditions:
 {
+  "description": "you are a Born Global Company onu manufacter",
   "brand": "Vendor1",
   "fix_cost": 100000,
   "variable_cost": 50000,
   "capital": 1000000,
-  "cash_flow": 50000,
-  "salary_rd": 50000,
-  "salary_maketing": 30000,
+  "cash_flow": -20980.0,
+  "salary_rd": 21100,
+  "salary_maketing": 10880,
   "products": [
     {
       "name": "Basic ONU",
-      "price": 100,
+      "price": 81.0,
       "cost": 60,
       "description": "Entry-level ONU device"
     }
@@ -220,7 +226,7 @@ Based on your current state and the following market conditions:
   "content": "Basic marketing campaign",
   "income": 0,
   "expenses": 0,
-  "sales": 605,
+  "sales": 0,
   "Updated_Yearly": true,
   "rival_info": {},
   "plan": "cost_leadership",
@@ -228,8 +234,8 @@ Based on your current state and the following market conditions:
   "score_product": 0.5,
   "score_add": 0.5,
   "market_analysis": {
-    "average_price": 100.0,
-    "profit_margin": 0.4
+    "average_price": 81.0,
+    "profit_margin": 0.25925925925925924
   },
   "strategy_plan": {
     "focus": "operational_efficiency",
@@ -260,8 +266,8 @@ LLM Response:
 ```json
 {
     "price_adjustment": -0.1,
-    "marketing_budget": 40000,
-    "rd_budget": 30000
+    "marketing_budget": 30000,
+    "rd_budget": 20000
 }
 ```
 ==================================================

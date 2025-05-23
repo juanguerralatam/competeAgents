@@ -39,6 +39,12 @@ class Simulation:
             writer = csv.writer(f)
             writer.writerow(['month', 'isp_id', 'selected_vendor', 'purchase_quantity', 'min_quality_score'])
             
+        # Initialize CSV file for vendor decisions
+        self.vendor_decisions_file = f'logs/vendor_decisions_{exp_name}_{datetime.now().strftime("%Y%m%d_%H%M%S")}.csv'
+        with open(self.vendor_decisions_file, 'w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(['month', 'vendor_id', 'rd_investment', 'marketing_investment', 'onu_price', 'quantity_sold'])
+        
         logging.info(f"Simulation initialized with duration of {duration} months")
         
     def initialize_agents(self):
@@ -68,6 +74,28 @@ class Simulation:
             'decision': decision
         })
 
+    def _log_vendor_decision(self, vendor: VendorAgent):
+        """Log vendor decision to CSV file: month, vendor_id, rd_investment, marketing_investment, onu_price (int), quantity_sold (aggregate from ISP decisions)"""
+        # Aggregate quantity sold for this vendor in this month
+        quantity_sold = sum(
+            d['decision']['purchase_quantity']
+            for d in self.isp_decisions
+            if d['decision']['selected_vendor'] == vendor.agent_id and d['month'] == self.current_step
+        )
+        rd_investment = vendor.state.current_state.get('salary_rd', 0)
+        marketing_investment = vendor.state.current_state.get('salary_maketing', 0)
+        onu_price = int(vendor.state.current_state['products'][0]['price']) if vendor.state.current_state.get('products') else 0
+        with open(self.vendor_decisions_file, 'a', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow([
+                self.current_step,
+                vendor.agent_id,
+                rd_investment,
+                marketing_investment,
+                onu_price,
+                quantity_sold
+            ])
+        
     def run_step(self):
         """Run a single simulation step"""
         logging.info(f"Running step {self.current_step + 1}/{self.duration}")
@@ -75,6 +103,29 @@ class Simulation:
         # Update market state
         self.market.update_market_state()
         logging.debug("Market state updated")
+        
+        # After updating market state, grow ISP cash flow with economy and country_development
+        economy_grown = self.market.market_state['market_growth']['economy_grown']
+        monthly_revenue_per_onu = 20  # You can adjust this value as needed
+        for isp in self.isps:
+            country_dev = isp.state.current_state.get('country_development', 1)
+            # Recurring revenue from all installed ONUs (cumulative purchases)
+            if 'installed_onus' not in isp.state.current_state:
+                isp.state.current_state['installed_onus'] = 0
+            isp.state.current_state['installed_onus'] += isp.state.current_state.get('buy', 0)
+            isp.state.current_state['cash_flow'] += isp.state.current_state['installed_onus'] * monthly_revenue_per_onu
+            # Grow cash flow with economy and country development
+            isp.state.current_state['cash_flow'] *= (1 + economy_grown * country_dev)
+            # Adjust monthly revenue based on country_development
+            country_development = isp.state.current_state.get('country_development', 1)
+            base_revenue = 10000  # Example base revenue
+            revenue_multiplier = 1 + (country_development - 0.5)  # Adjust multiplier based on development
+            monthly_revenue = base_revenue * revenue_multiplier
+
+            # Update cash flow based on ROI and revenue
+            investments = isp.state.current_state.get('salary_rd', 0) + isp.state.current_state.get('salary_maketing', 0)
+            roi = 0.1 * investments  # Example ROI calculation
+            isp.state.current_state['cash_flow'] += monthly_revenue + roi
         
         # Get vendor decisions from LLM
         for vendor in self.vendors:
@@ -106,18 +157,30 @@ class Simulation:
                         onu_sold_price = onu_cost_price * 1.2
                         profit = (onu_sold_price - onu_cost_price) * buy
                         isp.state.current_state['cash_flow'] += profit
+        # Log vendor decisions after all ISP decisions
+        for vendor in self.vendors:
+            self._log_vendor_decision(vendor)
 
     def _apply_vendor_decision(self, vendor: VendorAgent, decision: Dict[str, Any]):
-        """Apply vendor's LLM decision to their state"""
+        """Apply vendor's LLM decision to their state and update cash flow dynamically."""
         logging.debug(f"Applying vendor {vendor.agent_id} decision")
         # Update product prices
         for product in vendor.state.current_state['products']:
             product['price'] *= (1 + decision.get('price_adjustment', 0))
-            
         # Update investments
         vendor.state.current_state['salary_rd'] = decision.get('rd_budget', vendor.state.current_state['salary_rd'])
         vendor.state.current_state['salary_maketing'] = decision.get('marketing_budget', vendor.state.current_state['salary_maketing'])
-        
+        # Dynamically update cash_flow: add profit from sales, subtract R&D and marketing investments
+        sales = vendor.state.current_state.get('sales', 0)
+        price = vendor.state.current_state['products'][0]['price'] if vendor.state.current_state.get('products') else 0
+        cost = vendor.state.current_state['products'][0]['cost'] if vendor.state.current_state.get('products') else 0
+        profit = (price - cost) * sales
+        vendor.state.current_state['cash_flow'] += profit
+        vendor.state.current_state['cash_flow'] -= vendor.state.current_state['salary_rd']
+        vendor.state.current_state['cash_flow'] -= vendor.state.current_state['salary_maketing']
+        # Optionally, reset sales for next period
+        vendor.state.current_state['sales'] = 0
+
     def _apply_isp_decision(self, isp: ISPAgent, decision: Dict[str, Any]):
         """Apply ISP decision and log it, making purchase dynamic based on budget and market state"""
         economy_grown = self.market.market_state.get('market_growth', {}).get('economy_grown', 0.1)

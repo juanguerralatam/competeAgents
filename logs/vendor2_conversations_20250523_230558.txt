@@ -1,15 +1,16 @@
 
 ==================================================
-Timestamp: 2025-05-23 21:21:57
+Timestamp: 2025-05-23 23:06:12
 Agent: vendor2
 
 System Prompt:
 You are a vendor agent in a competitive ONU device market.
+Your description: you are a Multinational Company onu manufacter
 Your current state:
 - Brand: Vendor2
 - Strategy: cost_focus
 - Current sales: 0
-- Current cash flow: 60000
+- Current cash flow: 600000
 - Products: [
   {
     "name": "Premium ONU",
@@ -29,7 +30,7 @@ Based on your current state and the following market conditions:
   "fix_cost": 1200000,
   "variable_cost": 60000,
   "capital": 1200000,
-  "cash_flow": 60000,
+  "cash_flow": 600000,
   "salary_rd": 60000,
   "salary_maketing": 40000,
   "products": [
@@ -90,16 +91,17 @@ LLM Response:
 ==================================================
 
 ==================================================
-Timestamp: 2025-05-23 21:22:11
+Timestamp: 2025-05-23 23:06:24
 Agent: vendor2
 
 System Prompt:
 You are a vendor agent in a competitive ONU device market.
+Your description: you are a Multinational Company onu manufacter
 Your current state:
 - Brand: Vendor2
 - Strategy: cost_focus
-- Current sales: 28611
-- Current cash flow: 60000
+- Current sales: 73435
+- Current cash flow: 456000.0
 - Products: [
   {
     "name": "Premium ONU",
@@ -119,9 +121,9 @@ Based on your current state and the following market conditions:
   "fix_cost": 1200000,
   "variable_cost": 60000,
   "capital": 1200000,
-  "cash_flow": 60000,
-  "salary_rd": 20000,
-  "salary_maketing": 30000,
+  "cash_flow": 456000.0,
+  "salary_rd": 84000,
+  "salary_maketing": 60000,
   "products": [
     {
       "name": "Premium ONU",
@@ -133,7 +135,7 @@ Based on your current state and the following market conditions:
   "content": "Premium marketing campaign",
   "income": 0,
   "expenses": 0,
-  "sales": 28611,
+  "sales": 73435,
   "Updated_Yearly": true,
   "rival_info": {},
   "plan": "cost_focus",
@@ -172,28 +174,29 @@ Your response MUST be a valid JSON object with these exact keys:
 LLM Response:
 ```json
 {
-    "price_adjustment": -0.1,
+    "price_adjustment": -0.05,
     "marketing_budget": 30000,
-    "rd_budget": 20000
+    "rd_budget": 25000
 }
 ```
 ==================================================
 
 ==================================================
-Timestamp: 2025-05-23 21:22:24
+Timestamp: 2025-05-23 23:06:38
 Agent: vendor2
 
 System Prompt:
 You are a vendor agent in a competitive ONU device market.
+Your description: you are a Multinational Company onu manufacter
 Your current state:
 - Brand: Vendor2
 - Strategy: cost_focus
-- Current sales: 34206
-- Current cash flow: 60000
+- Current sales: 22889
+- Current cash flow: 4083105.0
 - Products: [
   {
     "name": "Premium ONU",
-    "price": 162.0,
+    "price": 171.0,
     "cost": 120,
     "description": "High-end ONU device"
   }
@@ -209,13 +212,13 @@ Based on your current state and the following market conditions:
   "fix_cost": 1200000,
   "variable_cost": 60000,
   "capital": 1200000,
-  "cash_flow": 60000,
-  "salary_rd": 20000,
-  "salary_maketing": 30000,
+  "cash_flow": 4083105.0,
+  "salary_rd": 69600,
+  "salary_maketing": 48480,
   "products": [
     {
       "name": "Premium ONU",
-      "price": 162.0,
+      "price": 171.0,
       "cost": 120,
       "description": "High-end ONU device"
     }
@@ -223,7 +226,7 @@ Based on your current state and the following market conditions:
   "content": "Premium marketing campaign",
   "income": 0,
   "expenses": 0,
-  "sales": 34206,
+  "sales": 22889,
   "Updated_Yearly": true,
   "rival_info": {},
   "plan": "cost_focus",
@@ -231,8 +234,8 @@ Based on your current state and the following market conditions:
   "score_product": 0.7,
   "score_add": 0.7,
   "market_analysis": {
-    "average_price": 162.0,
-    "profit_margin": 0.25925925925925924
+    "average_price": 171.0,
+    "profit_margin": 0.2982456140350877
   },
   "strategy_plan": {
     "focus": "product_differentiation",
