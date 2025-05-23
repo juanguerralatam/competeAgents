@@ -7,6 +7,7 @@ from tqdm import tqdm
 import matplotlib.pyplot as plt
 import csv
 import os
+import random
 
 # Configure logging
 logging.basicConfig(
@@ -41,96 +42,14 @@ class Simulation:
         logging.info(f"Simulation initialized with duration of {duration} months")
         
     def initialize_agents(self):
-        """Initialize vendor and ISP agents with defined parameters"""
-        logging.info("Initializing agents...")
-        # Initialize vendors
-        vendor1 = VendorAgent(
-            "vendor1",
-            {
-                'brand': 'Vendor1',
-                'fix_cost': 100000,
-                'variable_cost': 50000,
-                'capital': 1000000,
-                'cash_flow': 50000,
-                'salary_rd': 50000,
-                'salary_maketing': 30000,
-                'products': [
-                    {
-                        'name': 'Basic ONU',
-                        'price': 100,
-                        'cost': 60,
-                        'description': 'Entry-level ONU device'
-                    }
-                ],
-                'content': 'Basic marketing campaign',
-                'income': 0,
-                'expenses': 0,
-                'sales': 0,
-                'Updated_Yearly': True,
-                'rival_info': {},
-                'plan': 'cost_leadership',
-                'analysis_portfolios': 0.5,
-                'score_product': 0.5,
-                'score_add': 0.5
-            }
-        )
-        
-        vendor2 = VendorAgent(
-            "vendor2",
-            {
-                'brand': 'Vendor2',
-                'fix_cost': 120000,
-                'variable_cost': 60000,
-                'capital': 1200000,
-                'cash_flow': 60000,
-                'salary_rd': 60000,
-                'salary_maketing': 40000,
-                'products': [
-                    {
-                        'name': 'Premium ONU',
-                        'price': 200,
-                        'cost': 120,
-                        'description': 'High-end ONU device'
-                    }
-                ],
-                'content': 'Premium marketing campaign',
-                'income': 0,
-                'expenses': 0,
-                'sales': 0,
-                'Updated_Yearly': True,
-                'rival_info': {},
-                'plan': 'cost_focus',
-                'analysis_portfolios': 0.7,
-                'score_product': 0.7,
-                'score_add': 0.7
-            }
-        )
-        self.vendors = [vendor1, vendor2]
-        
-        # Initialize ISPs
-        isp1 = ISPAgent(
-            "isp1",
-            {
-                'cash_flow': 50000,
-                'buy': 0,
-                'analisys_porfolios': 0,
-                'score_product': 0,
-                'score_add': 0
-            }
-        )
-        
-        isp2 = ISPAgent(
-            "isp2",
-            {
-                'cash_flow': 75000,
-                'buy': 0,
-                'analisys_porfolios': 0,
-                'score_product': 0,
-                'score_add': 0
-            }
-        )
-        self.isps = [isp1, isp2]
-        logging.info(f"Initialized {len(self.vendors)} vendors and {len(self.isps)} ISPs")
+        """Initialize vendor and ISP agents from profiles.json"""
+        logging.info("Initializing agents from profiles.json...")
+        profiles_path = os.path.join(os.path.dirname(__file__), 'profiles.json')
+        with open(profiles_path, 'r') as f:
+            profiles = json.load(f)
+        self.vendors = [VendorAgent(v['agent_id'], v['state']) for v in profiles.get('vendors', [])]
+        self.isps = [ISPAgent(i['agent_id'], i['state']) for i in profiles.get('isps', [])]
+        logging.info(f"Initialized {len(self.vendors)} vendors and {len(self.isps)} ISPs from profiles.json")
         
     def _log_isp_decision(self, isp_id: str, decision: Dict[str, Any]):
         """Log ISP decision to CSV file"""
@@ -169,7 +88,25 @@ class Simulation:
             logging.debug(f"Getting decision from ISP {isp.agent_id}")
             decision = isp.make_decision(self.vendors)
             self._apply_isp_decision(isp, decision)
-            
+        
+        # After all decisions, update ISP cash_flow based on ONU purchases and profit
+        for isp in self.isps:
+            buy = isp.state.current_state.get('buy', 0)
+            min_quality_score = isp.state.current_state.get('min_quality_score', 0)
+            # Find the vendor from the last decision (if any)
+            last_decision = next((d['decision'] for d in reversed(self.isp_decisions) if d['isp_id'] == isp.agent_id and d['month'] == self.current_step), None)
+            if last_decision:
+                vendor_id = last_decision['selected_vendor']
+                vendor = next((v for v in self.vendors if v.agent_id == vendor_id), None)
+                if vendor:
+                    vendor_products = vendor.state.current_state.get('products', [])
+                    if vendor_products:
+                        onu_cost_price = vendor_products[0].get('price', 1)
+                        # Assume ISP sells ONU at 20% markup
+                        onu_sold_price = onu_cost_price * 1.2
+                        profit = (onu_sold_price - onu_cost_price) * buy
+                        isp.state.current_state['cash_flow'] += profit
+
     def _apply_vendor_decision(self, vendor: VendorAgent, decision: Dict[str, Any]):
         """Apply vendor's LLM decision to their state"""
         logging.debug(f"Applying vendor {vendor.agent_id} decision")
@@ -182,15 +119,30 @@ class Simulation:
         vendor.state.current_state['salary_maketing'] = decision.get('marketing_budget', vendor.state.current_state['salary_maketing'])
         
     def _apply_isp_decision(self, isp: ISPAgent, decision: Dict[str, Any]):
-        """Apply ISP decision and log it"""
-        # Log and store decision
-        self._log_isp_decision(isp.agent_id, decision)
-        isp.state.current_state['buy'] = decision['purchase_quantity']
-        isp.state.current_state['min_quality_score'] = decision['min_quality_score']
-        # Update vendor sales
+        """Apply ISP decision and log it, making purchase dynamic based on budget and market state"""
+        economy_grown = self.market.market_state.get('market_growth', {}).get('economy_grown', 0.1)
+        budget = isp.state.current_state.get('cash_flow', 0)
+        min_quality_score = decision.get('min_quality_score', 0.5)
         selected_vendor = next(v for v in self.vendors if v.agent_id == decision['selected_vendor'])
-        selected_vendor.state.current_state['sales'] += decision['purchase_quantity']
-        logging.info(f"ISP {isp.agent_id} made decision: {json.dumps(decision, indent=2)}")
+        vendor_products = selected_vendor.state.current_state.get('products', [])
+        if vendor_products:
+            product_price = vendor_products[0].get('price', 1)
+        else:
+            product_price = 1
+        max_affordable = int((budget / product_price) * (1 + economy_grown))
+        purchase_quantity = max(1, max_affordable)
+        # Subtract purchase cost from ISP's cash_flow
+        isp.state.current_state['cash_flow'] -= purchase_quantity * product_price
+        # Log and store decision
+        self._log_isp_decision(isp.agent_id, {
+            'selected_vendor': selected_vendor.agent_id,
+            'purchase_quantity': purchase_quantity,
+            'min_quality_score': min_quality_score
+        })
+        isp.state.current_state['buy'] = purchase_quantity
+        isp.state.current_state['min_quality_score'] = min_quality_score
+        selected_vendor.state.current_state['sales'] += purchase_quantity
+        logging.info(f"ISP {isp.agent_id} made decision: {{'selected_vendor': '{selected_vendor.agent_id}', 'purchase_quantity': {purchase_quantity}, 'min_quality_score': {min_quality_score}}}")
         
     def run(self, debug=False):
         """Run the complete simulation"""

@@ -157,6 +157,7 @@ class VendorAgent(BaseAgent):
         self.strategy = None
         self.market_tool = MarketAnalysisTool()
         self.strategy_tool = StrategyPlanningTool()
+        self.name = agent_id  # <-- add this line
         
     def _analyze_and_plan(self) -> tuple[Dict[str, Any], Dict[str, Any]]:
         """Run market_analysis and strategy_planning once and log usage"""
@@ -203,7 +204,7 @@ class VendorAgent(BaseAgent):
         
     def make_decision(self) -> Dict[str, Any]:
         """Compute analysis once, set required keys, and call common make_decision"""
-        self._required_keys = ['price_adjustment', 'marketing_budget', 'rd_budget', 'production_target']
+        self._required_keys = ['price_adjustment', 'marketing_budget', 'rd_budget']
         # perform market analysis and strategy planning once
         self.market_analysis, self.strategy_plan = self._analyze_and_plan()
         return super().make_decision()
@@ -235,49 +236,64 @@ class ISPAgent(BaseAgent):
         )
         
     def make_decision(self, vendors: List[Any]) -> Dict[str, Any]:
-        """Evaluate vendors internally and then make a purchase decision"""
-        self._required_keys = ['selected_vendor', 'purchase_quantity', 'min_quality_score']
-        # run portfolio analysis on provided vendors
-        evaluations = self.evaluate_vendors(vendors)
-        # store evaluations into current state for decision prompt
-        self.state.current_state['vendor_evaluations'] = evaluations
-        return super().make_decision()
-
-    def evaluate_vendors(self, vendors: List[Any]) -> Dict[str, float]:
-        """Evaluate available vendors based on defined criteria"""
-        # Prepare batch input for portfolio analysis
-        batch_input = {
-            'vendors': [
-                {
-                    'vendor_id': v.agent_id,
-                    'products': v.state.current_state['products'],
-                    'marketing': v.state.current_state.get('content', ''),
-                    'rd_budget': v.state.current_state.get('salary_rd', 0)
-                }
-                for v in vendors
-            ]
+        """Evaluate vendors using PortfolioAnalysisTool and make a purchase decision based on ISP's customer focus."""
+        from agents.tools import PortfolioAnalysisTool
+        tool = PortfolioAnalysisTool()
+        description = self.state.current_state.get('description', '').lower()
+        best_vendor = None
+        best_score = float('-inf')
+        min_quality = 0.5
+        # Cost-sensitive: prioritize lowest price with acceptable quality
+        if 'cost sensitive' in description:
+            min_price = float('inf')
+            for v in vendors:
+                products = v.state.current_state.get('products', [])
+                marketing = v.state.current_state.get('content', '')
+                rd_budget = v.state.current_state.get('salary_rd', 0)
+                result = tool._run({'products': products, 'marketing': marketing, 'rd_budget': rd_budget})
+                quality = v.state.current_state.get('score_product', 0)
+                if products:
+                    price = products[0].get('price', 1)
+                    if quality >= min_quality and price < min_price:
+                        min_price = price
+                        best_vendor = v
+            if best_vendor is None:
+                best_vendor = vendors[0]
+        # Premium: prioritize highest quality
+        elif 'premium' in description:
+            max_quality = float('-inf')
+            for v in vendors:
+                products = v.state.current_state.get('products', [])
+                marketing = v.state.current_state.get('content', '')
+                rd_budget = v.state.current_state.get('salary_rd', 0)
+                result = tool._run({'products': products, 'marketing': marketing, 'rd_budget': rd_budget})
+                quality = v.state.current_state.get('score_product', 0)
+                if quality > max_quality:
+                    max_quality = quality
+                    best_vendor = v
+            if best_vendor is None:
+                best_vendor = vendors[0]
+        # Default: use tool score
+        else:
+            for v in vendors:
+                products = v.state.current_state.get('products', [])
+                marketing = v.state.current_state.get('content', '')
+                rd_budget = v.state.current_state.get('salary_rd', 0)
+                result = tool._run({'products': products, 'marketing': marketing, 'rd_budget': rd_budget})
+                quality = v.state.current_state.get('score_product', 0)
+                score = result.get('score', 0)
+                if quality >= min_quality and score > best_score:
+                    best_score = score
+                    best_vendor = v
+            if best_vendor is None:
+                best_vendor = vendors[0]
+        selected_vendor = best_vendor.agent_id
+        budget = self.state.current_state.get('cash_flow', 0)
+        price = best_vendor.state.current_state['products'][0]['price'] if best_vendor.state.current_state['products'] else 1
+        purchase_quantity = max(1, int(budget / price))
+        min_quality_score = best_vendor.state.current_state.get('score_product', 0.5)
+        return {
+            'selected_vendor': selected_vendor,
+            'purchase_quantity': purchase_quantity,
+            'min_quality_score': min_quality_score
         }
-        # Single batch tool call
-        batch_results = self.portfolio_tool._run(batch_input)
-        LoggingUtils.log_tool_usage(
-            self.tool_usage_log,
-            self.agent_id,
-            'portfolio_analysis',
-            batch_input,
-            batch_results
-        )
-        # Compute evaluations from batch results
-        evaluations = {}
-        for v in vendors:
-            pa = batch_results.get(v.agent_id, {})
-            portfolio_score = pa.get('score', 0.5)
-            quality_score = (
-                v.state.current_state.get('score_product', 0.5) +
-                v.state.current_state.get('score_add', 0.5)
-            ) / 2
-            evaluations[v.agent_id] = {
-                'portfolio_score': portfolio_score,
-                'quality_score': quality_score,
-                'total_score': (portfolio_score + quality_score) / 2
-            }
-        return evaluations

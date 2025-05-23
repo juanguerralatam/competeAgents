@@ -1,21 +1,21 @@
 
 ==================================================
-Timestamp: 2025-05-23 19:32:57
-Agent: vendor2
+Timestamp: 2025-05-23 20:09:18
+Agent: vendor1
 
 System Prompt:
 You are a vendor agent in a competitive ONU device market.
 Your current state:
-- Brand: Vendor2
-- Strategy: cost_focus
+- Brand: Vendor1
+- Strategy: cost_leadership
 - Current sales: 0
-- Current cash flow: 60000
+- Current cash flow: 50000
 - Products: [
   {
-    "name": "Premium ONU",
-    "price": 200,
-    "cost": 120,
-    "description": "High-end ONU device"
+    "name": "Basic ONU",
+    "price": 100,
+    "cost": 60,
+    "description": "Entry-level ONU device"
   }
 ]
 
@@ -24,44 +24,44 @@ Make decisions to maximize your market share and profitability.
 Decision Prompt:
 Based on your current state and the following market conditions:
 {
-  "brand": "Vendor2",
-  "fix_cost": 120000,
-  "variable_cost": 60000,
-  "capital": 1200000,
-  "cash_flow": 60000,
-  "salary_rd": 60000,
-  "salary_maketing": 40000,
+  "brand": "Vendor1",
+  "fix_cost": 100000,
+  "variable_cost": 50000,
+  "capital": 1000000,
+  "cash_flow": 50000,
+  "salary_rd": 50000,
+  "salary_maketing": 30000,
   "products": [
     {
-      "name": "Premium ONU",
-      "price": 200,
-      "cost": 120,
-      "description": "High-end ONU device"
+      "name": "Basic ONU",
+      "price": 100,
+      "cost": 60,
+      "description": "Entry-level ONU device"
     }
   ],
-  "content": "Premium marketing campaign",
+  "content": "Basic marketing campaign",
   "income": 0,
   "expenses": 0,
   "sales": 0,
   "Updated_Yearly": true,
   "rival_info": {},
-  "plan": "cost_focus",
-  "analysis_portfolios": 0.7,
-  "score_product": 0.7,
-  "score_add": 0.7,
+  "plan": "cost_leadership",
+  "analysis_portfolios": 0.5,
+  "score_product": 0.5,
+  "score_add": 0.5,
   "market_analysis": {
-    "average_price": 200.0,
+    "average_price": 100.0,
     "profit_margin": 0.4
   },
   "strategy_plan": {
-    "focus": "product_differentiation",
-    "pricing_strategy": "value_based_pricing",
-    "market_approach": "niche_market",
-    "production_recommendation": "quality_over_quantity",
+    "focus": "operational_efficiency",
+    "pricing_strategy": "competitive_pricing",
+    "market_approach": "mass_market",
+    "production_recommendation": "scale_up",
     "next_steps": [
-      "Enhance product features",
-      "Target specific customer segments",
-      "Invest in brand development"
+      "Optimize production costs",
+      "Increase production volume",
+      "Expand market reach"
     ]
   }
 }
@@ -82,29 +82,29 @@ LLM Response:
 ```json
 {
     "price_adjustment": -0.1,
-    "marketing_budget": 30000,
-    "rd_budget": 20000
+    "marketing_budget": 40000,
+    "rd_budget": 30000
 }
 ```
 ==================================================
 
 ==================================================
-Timestamp: 2025-05-23 19:33:25
-Agent: vendor2
+Timestamp: 2025-05-23 20:09:32
+Agent: vendor1
 
 System Prompt:
 You are a vendor agent in a competitive ONU device market.
 Your current state:
-- Brand: Vendor2
-- Strategy: cost_focus
-- Current sales: 113
-- Current cash flow: 60000
+- Brand: Vendor1
+- Strategy: cost_leadership
+- Current sales: 515
+- Current cash flow: 50000
 - Products: [
   {
-    "name": "Premium ONU",
-    "price": 200,
-    "cost": 120,
-    "description": "High-end ONU device"
+    "name": "Basic ONU",
+    "price": 100,
+    "cost": 60,
+    "description": "Entry-level ONU device"
   }
 ]
 
@@ -113,44 +113,44 @@ Make decisions to maximize your market share and profitability.
 Decision Prompt:
 Based on your current state and the following market conditions:
 {
-  "brand": "Vendor2",
-  "fix_cost": 120000,
-  "variable_cost": 60000,
-  "capital": 1200000,
-  "cash_flow": 60000,
-  "salary_rd": 60000,
-  "salary_maketing": 40000,
+  "brand": "Vendor1",
+  "fix_cost": 100000,
+  "variable_cost": 50000,
+  "capital": 1000000,
+  "cash_flow": 50000,
+  "salary_rd": 50000,
+  "salary_maketing": 30000,
   "products": [
     {
-      "name": "Premium ONU",
-      "price": 200,
-      "cost": 120,
-      "description": "High-end ONU device"
+      "name": "Basic ONU",
+      "price": 100,
+      "cost": 60,
+      "description": "Entry-level ONU device"
     }
   ],
-  "content": "Premium marketing campaign",
+  "content": "Basic marketing campaign",
   "income": 0,
   "expenses": 0,
-  "sales": 113,
+  "sales": 515,
   "Updated_Yearly": true,
   "rival_info": {},
-  "plan": "cost_focus",
-  "analysis_portfolios": 0.7,
-  "score_product": 0.7,
-  "score_add": 0.7,
+  "plan": "cost_leadership",
+  "analysis_portfolios": 0.5,
+  "score_product": 0.5,
+  "score_add": 0.5,
   "market_analysis": {
-    "average_price": 200.0,
+    "average_price": 100.0,
     "profit_margin": 0.4
   },
   "strategy_plan": {
-    "focus": "product_differentiation",
-    "pricing_strategy": "value_based_pricing",
-    "market_approach": "niche_market",
-    "production_recommendation": "quality_over_quantity",
+    "focus": "operational_efficiency",
+    "pricing_strategy": "competitive_pricing",
+    "market_approach": "mass_market",
+    "production_recommendation": "scale_up",
     "next_steps": [
-      "Enhance product features",
-      "Target specific customer segments",
-      "Invest in brand development"
+      "Optimize production costs",
+      "Increase production volume",
+      "Expand market reach"
     ]
   }
 }
@@ -171,29 +171,29 @@ LLM Response:
 ```json
 {
     "price_adjustment": -0.1,
-    "marketing_budget": 30000,
-    "rd_budget": 20000
+    "marketing_budget": 40000,
+    "rd_budget": 30000
 }
 ```
 ==================================================
 
 ==================================================
-Timestamp: 2025-05-23 19:33:54
-Agent: vendor2
+Timestamp: 2025-05-23 20:09:42
+Agent: vendor1
 
 System Prompt:
 You are a vendor agent in a competitive ONU device market.
 Your current state:
-- Brand: Vendor2
-- Strategy: cost_focus
-- Current sales: 226
-- Current cash flow: 60000
+- Brand: Vendor1
+- Strategy: cost_leadership
+- Current sales: 605
+- Current cash flow: 50000
 - Products: [
   {
-    "name": "Premium ONU",
-    "price": 200,
-    "cost": 120,
-    "description": "High-end ONU device"
+    "name": "Basic ONU",
+    "price": 100,
+    "cost": 60,
+    "description": "Entry-level ONU device"
   }
 ]
 
@@ -202,44 +202,44 @@ Make decisions to maximize your market share and profitability.
 Decision Prompt:
 Based on your current state and the following market conditions:
 {
-  "brand": "Vendor2",
-  "fix_cost": 120000,
-  "variable_cost": 60000,
-  "capital": 1200000,
-  "cash_flow": 60000,
-  "salary_rd": 60000,
-  "salary_maketing": 40000,
+  "brand": "Vendor1",
+  "fix_cost": 100000,
+  "variable_cost": 50000,
+  "capital": 1000000,
+  "cash_flow": 50000,
+  "salary_rd": 50000,
+  "salary_maketing": 30000,
   "products": [
     {
-      "name": "Premium ONU",
-      "price": 200,
-      "cost": 120,
-      "description": "High-end ONU device"
+      "name": "Basic ONU",
+      "price": 100,
+      "cost": 60,
+      "description": "Entry-level ONU device"
     }
   ],
-  "content": "Premium marketing campaign",
+  "content": "Basic marketing campaign",
   "income": 0,
   "expenses": 0,
-  "sales": 226,
+  "sales": 605,
   "Updated_Yearly": true,
   "rival_info": {},
-  "plan": "cost_focus",
-  "analysis_portfolios": 0.7,
-  "score_product": 0.7,
-  "score_add": 0.7,
+  "plan": "cost_leadership",
+  "analysis_portfolios": 0.5,
+  "score_product": 0.5,
+  "score_add": 0.5,
   "market_analysis": {
-    "average_price": 200.0,
+    "average_price": 100.0,
     "profit_margin": 0.4
   },
   "strategy_plan": {
-    "focus": "product_differentiation",
-    "pricing_strategy": "value_based_pricing",
-    "market_approach": "niche_market",
-    "production_recommendation": "quality_over_quantity",
+    "focus": "operational_efficiency",
+    "pricing_strategy": "competitive_pricing",
+    "market_approach": "mass_market",
+    "production_recommendation": "scale_up",
     "next_steps": [
-      "Enhance product features",
-      "Target specific customer segments",
-      "Invest in brand development"
+      "Optimize production costs",
+      "Increase production volume",
+      "Expand market reach"
     ]
   }
 }
@@ -260,8 +260,8 @@ LLM Response:
 ```json
 {
     "price_adjustment": -0.1,
-    "marketing_budget": 30000,
-    "rd_budget": 20000
+    "marketing_budget": 40000,
+    "rd_budget": 30000
 }
 ```
 ==================================================

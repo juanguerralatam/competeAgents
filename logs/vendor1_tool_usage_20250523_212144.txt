@@ -1,6 +1,6 @@
 
 ==================================================
-Timestamp: 2025-05-23 19:32:41
+Timestamp: 2025-05-23 21:21:44
 Agent: vendor1
 Tool: market_analysis
 Input: {
@@ -25,11 +25,12 @@ Output: {
 ==================================================
 
 ==================================================
-Timestamp: 2025-05-23 19:32:41
+Timestamp: 2025-05-23 21:21:44
 Agent: vendor1
 Tool: strategy_planning
 Input: {
   "current_state": {
+    "description": "you are a Born Global Company onu manufacter",
     "brand": "Vendor1",
     "fix_cost": 100000,
     "variable_cost": 50000,
@@ -76,47 +77,48 @@ Output: {
 ==================================================
 
 ==================================================
-Timestamp: 2025-05-23 19:33:12
+Timestamp: 2025-05-23 21:21:57
 Agent: vendor1
 Tool: market_analysis
 Input: {
   "products": [
     {
       "name": "Basic ONU",
-      "price": 100,
+      "price": 90.0,
       "cost": 60,
       "description": "Entry-level ONU device"
     }
   ],
   "prices": [
-    100
+    90.0
   ],
-  "market_share": 0,
+  "market_share": 572,
   "cash_flow": 50000
 }
 Output: {
-  "average_price": 100.0,
-  "profit_margin": 0.4
+  "average_price": 90.0,
+  "profit_margin": 0.3333333333333333
 }
 ==================================================
 
 ==================================================
-Timestamp: 2025-05-23 19:33:12
+Timestamp: 2025-05-23 21:21:57
 Agent: vendor1
 Tool: strategy_planning
 Input: {
   "current_state": {
+    "description": "you are a Born Global Company onu manufacter",
     "brand": "Vendor1",
     "fix_cost": 100000,
     "variable_cost": 50000,
     "capital": 1000000,
     "cash_flow": 50000,
-    "salary_rd": 50000,
-    "salary_maketing": 30000,
+    "salary_rd": 30000,
+    "salary_maketing": 40000,
     "products": [
       {
         "name": "Basic ONU",
-        "price": 100,
+        "price": 90.0,
         "cost": 60,
         "description": "Entry-level ONU device"
       }
@@ -124,7 +126,7 @@ Input: {
     "content": "Basic marketing campaign",
     "income": 0,
     "expenses": 0,
-    "sales": 0,
+    "sales": 572,
     "Updated_Yearly": true,
     "rival_info": {},
     "plan": "cost_leadership",
@@ -133,8 +135,8 @@ Input: {
     "score_add": 0.5
   },
   "market_analysis": {
-    "average_price": 100.0,
-    "profit_margin": 0.4
+    "average_price": 90.0,
+    "profit_margin": 0.3333333333333333
   },
   "plan": "cost_leadership"
 }
@@ -152,47 +154,48 @@ Output: {
 ==================================================
 
 ==================================================
-Timestamp: 2025-05-23 19:33:38
+Timestamp: 2025-05-23 21:22:11
 Agent: vendor1
 Tool: market_analysis
 Input: {
   "products": [
     {
       "name": "Basic ONU",
-      "price": 100,
+      "price": 81.0,
       "cost": 60,
       "description": "Entry-level ONU device"
     }
   ],
   "prices": [
-    100
+    81.0
   ],
-  "market_share": 0,
+  "market_share": 684,
   "cash_flow": 50000
 }
 Output: {
-  "average_price": 100.0,
-  "profit_margin": 0.4
+  "average_price": 81.0,
+  "profit_margin": 0.25925925925925924
 }
 ==================================================
 
 ==================================================
-Timestamp: 2025-05-23 19:33:38
+Timestamp: 2025-05-23 21:22:11
 Agent: vendor1
 Tool: strategy_planning
 Input: {
   "current_state": {
+    "description": "you are a Born Global Company onu manufacter",
     "brand": "Vendor1",
     "fix_cost": 100000,
     "variable_cost": 50000,
     "capital": 1000000,
     "cash_flow": 50000,
-    "salary_rd": 50000,
-    "salary_maketing": 30000,
+    "salary_rd": 30000,
+    "salary_maketing": 40000,
     "products": [
       {
         "name": "Basic ONU",
-        "price": 100,
+        "price": 81.0,
         "cost": 60,
         "description": "Entry-level ONU device"
       }
@@ -200,7 +203,7 @@ Input: {
     "content": "Basic marketing campaign",
     "income": 0,
     "expenses": 0,
-    "sales": 0,
+    "sales": 684,
     "Updated_Yearly": true,
     "rival_info": {},
     "plan": "cost_leadership",
@@ -209,8 +212,8 @@ Input: {
     "score_add": 0.5
   },
   "market_analysis": {
-    "average_price": 100.0,
-    "profit_margin": 0.4
+    "average_price": 81.0,
+    "profit_margin": 0.25925925925925924
   },
   "plan": "cost_leadership"
 }
