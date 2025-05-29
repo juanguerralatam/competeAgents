@@ -1,12 +1,12 @@
 # Competitive Vendor-ISP Market Simulation
 
-A multi-agent based simulation (ABM) modeling the competitive dynamics between ONU (Optical Network Unit) device manufacturers (vendors) and Internet Service Providers (ISPs) using LangGraph and DeepSeek for intelligent agent behavior.
+A multi-agent based simulation (ABM) modeling the competitive dynamics between ONU (Optical Network Unit) device vendors and Internet Service Providers (buyers) using LangGraph and DeepSeek for intelligent agent behavior.
 
 ## Project Overview
 
 This simulation creates a dynamic market environment featuring:
 
-- **2 Vendor Agents:** Representing manufacturers of ONU devices.
+- **2 Vendor Agents:** Representing vendors of ONU devices.
 - **10 ISP Agents:** Representing buyers of ONU devices.
 
 The simulation models how vendors compete for market share by implementing various business strategies, while ISPs make purchasing decisions based on a range of criteria and market conditions.
@@ -15,7 +15,7 @@ The simulation models how vendors compete for market share by implementing vario
 
 - **Intelligent Agent Behavior:**
     - **Vendors:**
-        - Manufacture diverse ONU devices with varying characteristics.
+        - Vendor diverse ONU devices with varying characteristics.
         - Employ and adapt competitive strategies:
             - **Cost Leadership:** Focusing on high-volume production and economies of scale.
             - **Cost Focus:** Targeting specific market niches with specialized products.
@@ -81,7 +81,7 @@ project/
 
 ### Vendor Parameters
 - **Investments:** `[salary_rd]` (R&D budget), `[salary_maketing]` (Marketing budget)
-- **Product Portfolio:** `[name, price, cost, description]` (Details of manufactured ONU devices)
+- **Product Portfolio:** `[name, price, cost, description]` (Details of vendor ONU devices)
 - **Marketing Campaigns:** `[content]` (Content of active marketing efforts)
 - **Operations:** `[income, expenses, sales]` (Financial performance metrics)
 - **Strategy:** `[Updated_Yearly, rival_info, plan]` (Annual strategy update, information about competitors, strategic plan)
@@ -155,4 +155,4 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details. 
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.

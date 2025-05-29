@@ -19,7 +19,6 @@ def analyze_competition(vendors: List[Dict[str, Any]]) -> Dict[str, Any]:
     return {
         'market_concentration': calculate_herfindahl_index(vendors),
         'price_competition': analyze_price_competition(vendors),
-        'product_differentiation': analyze_product_differentiation(vendors)
     }
 
 def calculate_herfindahl_index(vendors: List[Dict[str, Any]]) -> float:
@@ -35,8 +34,3 @@ def analyze_price_competition(vendors: List[Dict[str, Any]]) -> Dict[str, Any]:
         'price_variance': np.var(prices),
         'average_price': np.mean(prices)
     }
-
-def analyze_product_differentiation(vendors: List[Dict[str, Any]]) -> float:
-    """Calculate product differentiation index"""
-    # TODO: Implement product differentiation analysis
-    return 0.0 

@@ -1,0 +1,833 @@
+2025-05-29 15:34:08,731 - INFO - Starting simulation 'juan2' for 6 months
+2025-05-29 15:34:08,731 - INFO - Simulation initialized with duration of 6 months
+2025-05-29 15:34:08,731 - INFO - Starting simulation
+2025-05-29 15:34:08,731 - INFO - Initializing agents from profiles.json...
+2025-05-29 15:34:08,888 - INFO - Initialized 2 vendors and 12 buyers from profiles.json
+2025-05-29 15:34:08,889 - INFO - Running step 1/6
+2025-05-29 15:34:08,889 - INFO - Agent vendor1 used tool market_analysis
+2025-05-29 15:34:08,890 - INFO - Agent vendor1 used tool strategy_planning
+2025-05-29 15:34:09,075 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-29 15:34:15,241 - INFO - 
+==================================================
+2025-05-29 15:34:15,241 - INFO - Agent vendor1 LLM Conversation:
+2025-05-29 15:34:15,241 - INFO - System Prompt:
+You are a vendor agent in a competitive ONU device market.
+Your description: you are a Born Global Company onu manufacter
+Your current state:
+- Brand: Vendor1
+- Strategy: cost_leadership
+- Current sales: 0
+- Current cash flow: 50000
+- Products: [
+  {
+    "name": "Basic ONU",
+    "price": 100,
+    "cost": 60,
+    "description": "Entry-level ONU device"
+  }
+]
+
+Make decisions to maximize your market share and profitability.
+2025-05-29 15:34:15,241 - INFO - Decision Prompt:
+Based on your current state and the following market conditions:
+{
+  "description": "you are a Born Global Company onu manufacter",
+  "brand": "Vendor1",
+  "fix_cost": 100000,
+  "variable_cost": 50000,
+  "capital": 1000000,
+  "cash_flow": 50000,
+  "salary_rd": 30000,
+  "salary_maketing": 20000,
+  "products": [
+    {
+      "name": "Basic ONU",
+      "price": 100,
+      "cost": 60,
+      "description": "Entry-level ONU device"
+    }
+  ],
+  "content": "Basic marketing campaign",
+  "income": 0,
+  "expenses": 0,
+  "sales": 0,
+  "Updated_Yearly": true,
+  "rival_info": {},
+  "plan": "cost_leadership",
+  "analysis_portfolios": 0.6,
+  "score_product": 0.6,
+  "score_add": 0.6,
+  "market_analysis": {
+    "average_price": 100.0,
+    "profit_margin": 0.4
+  },
+  "strategy_plan": {
+    "focus": "operational_efficiency",
+    "pricing_strategy": "competitive_pricing",
+    "market_approach": "mass_market",
+    "production_recommendation": "scale_up",
+    "next_steps": [
+      "Optimize production costs",
+      "Increase production volume",
+      "Expand market reach"
+    ]
+  }
+}
+
+Make decisions about:
+1. Product pricing (adjust current prices by a percentage)
+2. Marketing investments (allocate budget)
+3. R&D investments (allocate budget)
+
+Your response MUST be a valid JSON object with these exact keys:
+{
+    "price_adjustment": <float between -0.2 and 0.2>,
+    "marketing_budget": <integer between 10000 and 50000>,
+    "rd_budget": <integer between 10000 and 50000>
+}
+2025-05-29 15:34:15,241 - INFO - LLM Response:
+```json
+{
+    "price_adjustment": -0.1,
+    "marketing_budget": 30000,
+    "rd_budget": 20000
+}
+```
+2025-05-29 15:34:15,241 - INFO - ==================================================
+
+2025-05-29 15:34:15,241 - INFO - Vendor vendor1 made decision: {
+  "price_adjustment": -0.1,
+  "marketing_budget": 14000,
+  "rd_budget": 25000
+}
+2025-05-29 15:34:15,242 - INFO - Agent vendor2 used tool market_analysis
+2025-05-29 15:34:15,242 - INFO - Agent vendor2 used tool strategy_planning
+2025-05-29 15:34:15,423 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-29 15:34:20,808 - INFO - 
+==================================================
+2025-05-29 15:34:20,808 - INFO - Agent vendor2 LLM Conversation:
+2025-05-29 15:34:20,808 - INFO - System Prompt:
+You are a vendor agent in a competitive ONU device market.
+Your description: you are a Multinational Company onu manufacter
+Your current state:
+- Brand: Vendor2
+- Strategy: cost_focus
+- Current sales: 0
+- Current cash flow: 600000
+- Products: [
+  {
+    "name": "Premium ONU",
+    "price": 200,
+    "cost": 120,
+    "description": "High-end ONU device"
+  }
+]
+
+Make decisions to maximize your market share and profitability.
+2025-05-29 15:34:20,808 - INFO - Decision Prompt:
+Based on your current state and the following market conditions:
+{
+  "description": "you are a Multinational Company onu manufacter",
+  "brand": "Vendor2",
+  "fix_cost": 1200000,
+  "variable_cost": 60000,
+  "capital": 1200000,
+  "cash_flow": 600000,
+  "salary_rd": 60000,
+  "salary_maketing": 40000,
+  "products": [
+    {
+      "name": "Premium ONU",
+      "price": 200,
+      "cost": 120,
+      "description": "High-end ONU device"
+    }
+  ],
+  "content": "Premium marketing campaign",
+  "income": 0,
+  "expenses": 0,
+  "sales": 0,
+  "Updated_Yearly": true,
+  "rival_info": {},
+  "plan": "cost_focus",
+  "analysis_portfolios": 0.7,
+  "score_product": 0.7,
+  "score_add": 0.7,
+  "market_analysis": {
+    "average_price": 200.0,
+    "profit_margin": 0.4
+  },
+  "strategy_plan": {
+    "focus": "product_differentiation",
+    "pricing_strategy": "value_based_pricing",
+    "market_approach": "niche_market",
+    "production_recommendation": "quality_over_quantity",
+    "next_steps": [
+      "Enhance product features",
+      "Target specific customer segments",
+      "Invest in brand development"
+    ]
+  }
+}
+
+Make decisions about:
+1. Product pricing (adjust current prices by a percentage)
+2. Marketing investments (allocate budget)
+3. R&D investments (allocate budget)
+
+Your response MUST be a valid JSON object with these exact keys:
+{
+    "price_adjustment": <float between -0.2 and 0.2>,
+    "marketing_budget": <integer between 10000 and 50000>,
+    "rd_budget": <integer between 10000 and 50000>
+}
+2025-05-29 15:34:20,808 - INFO - LLM Response:
+```json
+{
+    "price_adjustment": -0.1,
+    "marketing_budget": 30000,
+    "rd_budget": 20000
+}
+```
+2025-05-29 15:34:20,808 - INFO - ==================================================
+
+2025-05-29 15:34:20,808 - INFO - Vendor vendor2 made decision: {
+  "price_adjustment": -0.1,
+  "marketing_budget": 60000,
+  "rd_budget": 84000
+}
+2025-05-29 15:34:20,808 - INFO - Buyer isp1 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 29383, 'min_quality_score': 0.7}
+2025-05-29 15:34:20,808 - INFO - Buyer isp2 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 23300, 'min_quality_score': 0.7}
+2025-05-29 15:34:20,809 - INFO - Buyer isp3 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 17321, 'min_quality_score': 0.7}
+2025-05-29 15:34:20,809 - INFO - Buyer isp4 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 293, 'min_quality_score': 0.7}
+2025-05-29 15:34:20,809 - INFO - Buyer isp5 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 352, 'min_quality_score': 0.7}
+2025-05-29 15:34:20,809 - INFO - Buyer isp6 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 470, 'min_quality_score': 0.7}
+2025-05-29 15:34:20,809 - INFO - Buyer isp7 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 174, 'min_quality_score': 0.7}
+2025-05-29 15:34:20,809 - INFO - Buyer isp8 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 524, 'min_quality_score': 0.7}
+2025-05-29 15:34:20,809 - INFO - Buyer isp9 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 407, 'min_quality_score': 0.7}
+2025-05-29 15:34:20,809 - INFO - Buyer isp10 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 346, 'min_quality_score': 0.7}
+2025-05-29 15:34:20,809 - INFO - Buyer isp11 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 317, 'min_quality_score': 0.7}
+2025-05-29 15:34:20,809 - INFO - Buyer isp12 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 548, 'min_quality_score': 0.7}
+2025-05-29 15:34:20,809 - INFO - Completed step 1/6
+2025-05-29 15:34:20,810 - INFO - Running step 2/6
+2025-05-29 15:34:20,810 - INFO - Agent vendor1 used tool market_analysis
+2025-05-29 15:34:20,810 - INFO - Agent vendor1 used tool strategy_planning
+2025-05-29 15:34:20,990 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-29 15:34:29,092 - INFO - 
+==================================================
+2025-05-29 15:34:29,092 - INFO - Agent vendor1 LLM Conversation:
+2025-05-29 15:34:29,092 - INFO - System Prompt:
+You are a vendor agent in a competitive ONU device market.
+Your description: you are a Born Global Company onu manufacter
+Your current state:
+- Brand: Vendor1
+- Strategy: cost_leadership
+- Current sales: 0
+- Current cash flow: 11000.0
+- Products: [
+  {
+    "name": "Basic ONU",
+    "price": 90.0,
+    "cost": 60,
+    "description": "Entry-level ONU device"
+  }
+]
+
+Make decisions to maximize your market share and profitability.
+2025-05-29 15:34:29,092 - INFO - Decision Prompt:
+Based on your current state and the following market conditions:
+{
+  "description": "you are a Born Global Company onu manufacter",
+  "brand": "Vendor1",
+  "fix_cost": 100000,
+  "variable_cost": 50000,
+  "capital": 1000000,
+  "cash_flow": 11000.0,
+  "salary_rd": 25000,
+  "salary_maketing": 14000,
+  "products": [
+    {
+      "name": "Basic ONU",
+      "price": 90.0,
+      "cost": 60,
+      "description": "Entry-level ONU device"
+    }
+  ],
+  "content": "Basic marketing campaign",
+  "income": 0,
+  "expenses": 0,
+  "sales": 0,
+  "Updated_Yearly": true,
+  "rival_info": {},
+  "plan": "cost_leadership",
+  "analysis_portfolios": 0.6,
+  "score_product": 0.6,
+  "score_add": 0.6,
+  "market_analysis": {
+    "average_price": 90.0,
+    "profit_margin": 0.3333333333333333
+  },
+  "strategy_plan": {
+    "focus": "operational_efficiency",
+    "pricing_strategy": "competitive_pricing",
+    "market_approach": "mass_market",
+    "production_recommendation": "scale_up",
+    "next_steps": [
+      "Optimize production costs",
+      "Increase production volume",
+      "Expand market reach"
+    ]
+  }
+}
+
+Make decisions about:
+1. Product pricing (adjust current prices by a percentage)
+2. Marketing investments (allocate budget)
+3. R&D investments (allocate budget)
+
+Your response MUST be a valid JSON object with these exact keys:
+{
+    "price_adjustment": <float between -0.2 and 0.2>,
+    "marketing_budget": <integer between 10000 and 50000>,
+    "rd_budget": <integer between 10000 and 50000>
+}
+2025-05-29 15:34:29,092 - INFO - LLM Response:
+```json
+{
+    "price_adjustment": -0.1,
+    "marketing_budget": 30000,
+    "rd_budget": 20000
+}
+```
+2025-05-29 15:34:29,092 - INFO - ==================================================
+
+2025-05-29 15:34:29,093 - INFO - Vendor vendor1 made decision: {
+  "price_adjustment": -0.1,
+  "marketing_budget": 10880,
+  "rd_budget": 21100
+}
+2025-05-29 15:34:29,093 - INFO - Agent vendor2 used tool market_analysis
+2025-05-29 15:34:29,093 - INFO - Agent vendor2 used tool strategy_planning
+2025-05-29 15:34:29,274 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-29 15:34:34,562 - INFO - 
+==================================================
+2025-05-29 15:34:34,562 - INFO - Agent vendor2 LLM Conversation:
+2025-05-29 15:34:34,562 - INFO - System Prompt:
+You are a vendor agent in a competitive ONU device market.
+Your description: you are a Multinational Company onu manufacter
+Your current state:
+- Brand: Vendor2
+- Strategy: cost_focus
+- Current sales: 73435
+- Current cash flow: 456000.0
+- Products: [
+  {
+    "name": "Premium ONU",
+    "price": 180.0,
+    "cost": 120,
+    "description": "High-end ONU device"
+  }
+]
+
+Make decisions to maximize your market share and profitability.
+2025-05-29 15:34:34,563 - INFO - Decision Prompt:
+Based on your current state and the following market conditions:
+{
+  "description": "you are a Multinational Company onu manufacter",
+  "brand": "Vendor2",
+  "fix_cost": 1200000,
+  "variable_cost": 60000,
+  "capital": 1200000,
+  "cash_flow": 456000.0,
+  "salary_rd": 84000,
+  "salary_maketing": 60000,
+  "products": [
+    {
+      "name": "Premium ONU",
+      "price": 180.0,
+      "cost": 120,
+      "description": "High-end ONU device"
+    }
+  ],
+  "content": "Premium marketing campaign",
+  "income": 0,
+  "expenses": 0,
+  "sales": 73435,
+  "Updated_Yearly": true,
+  "rival_info": {},
+  "plan": "cost_focus",
+  "analysis_portfolios": 0.7,
+  "score_product": 0.7,
+  "score_add": 0.7,
+  "market_analysis": {
+    "average_price": 180.0,
+    "profit_margin": 0.3333333333333333
+  },
+  "strategy_plan": {
+    "focus": "product_differentiation",
+    "pricing_strategy": "value_based_pricing",
+    "market_approach": "niche_market",
+    "production_recommendation": "quality_over_quantity",
+    "next_steps": [
+      "Enhance product features",
+      "Target specific customer segments",
+      "Invest in brand development"
+    ]
+  }
+}
+
+Make decisions about:
+1. Product pricing (adjust current prices by a percentage)
+2. Marketing investments (allocate budget)
+3. R&D investments (allocate budget)
+
+Your response MUST be a valid JSON object with these exact keys:
+{
+    "price_adjustment": <float between -0.2 and 0.2>,
+    "marketing_budget": <integer between 10000 and 50000>,
+    "rd_budget": <integer between 10000 and 50000>
+}
+2025-05-29 15:34:34,563 - INFO - LLM Response:
+```json
+{
+    "price_adjustment": -0.05,
+    "marketing_budget": 30000,
+    "rd_budget": 25000
+}
+```
+2025-05-29 15:34:34,563 - INFO - ==================================================
+
+2025-05-29 15:34:34,563 - INFO - Vendor vendor2 made decision: {
+  "price_adjustment": -0.05,
+  "marketing_budget": 48480,
+  "rd_budget": 69600
+}
+2025-05-29 15:34:34,563 - INFO - Buyer isp1 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 9226, 'min_quality_score': 0.7}
+2025-05-29 15:34:34,563 - INFO - Buyer isp2 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 7252, 'min_quality_score': 0.7}
+2025-05-29 15:34:34,563 - INFO - Buyer isp3 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 5343, 'min_quality_score': 0.7}
+2025-05-29 15:34:34,563 - INFO - Buyer isp4 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 92, 'min_quality_score': 0.7}
+2025-05-29 15:34:34,563 - INFO - Buyer isp5 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 111, 'min_quality_score': 0.7}
+2025-05-29 15:34:34,563 - INFO - Buyer isp6 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 147, 'min_quality_score': 0.7}
+2025-05-29 15:34:34,564 - INFO - Buyer isp7 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 54, 'min_quality_score': 0.7}
+2025-05-29 15:34:34,564 - INFO - Buyer isp8 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 163, 'min_quality_score': 0.7}
+2025-05-29 15:34:34,564 - INFO - Buyer isp9 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 127, 'min_quality_score': 0.7}
+2025-05-29 15:34:34,564 - INFO - Buyer isp10 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 107, 'min_quality_score': 0.7}
+2025-05-29 15:34:34,564 - INFO - Buyer isp11 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 98, 'min_quality_score': 0.7}
+2025-05-29 15:34:34,564 - INFO - Buyer isp12 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 169, 'min_quality_score': 0.7}
+2025-05-29 15:34:34,564 - INFO - Completed step 2/6
+2025-05-29 15:34:34,564 - INFO - Running step 3/6
+2025-05-29 15:34:34,565 - INFO - Agent vendor1 used tool market_analysis
+2025-05-29 15:34:34,565 - INFO - Agent vendor1 used tool strategy_planning
+2025-05-29 15:34:34,734 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-29 15:34:40,082 - INFO - 
+==================================================
+2025-05-29 15:34:40,082 - INFO - Agent vendor1 LLM Conversation:
+2025-05-29 15:34:40,082 - INFO - System Prompt:
+You are a vendor agent in a competitive ONU device market.
+Your description: you are a Born Global Company onu manufacter
+Your current state:
+- Brand: Vendor1
+- Strategy: cost_leadership
+- Current sales: 0
+- Current cash flow: -20980.0
+- Products: [
+  {
+    "name": "Basic ONU",
+    "price": 81.0,
+    "cost": 60,
+    "description": "Entry-level ONU device"
+  }
+]
+
+Make decisions to maximize your market share and profitability.
+2025-05-29 15:34:40,082 - INFO - Decision Prompt:
+Based on your current state and the following market conditions:
+{
+  "description": "you are a Born Global Company onu manufacter",
+  "brand": "Vendor1",
+  "fix_cost": 100000,
+  "variable_cost": 50000,
+  "capital": 1000000,
+  "cash_flow": -20980.0,
+  "salary_rd": 21100,
+  "salary_maketing": 10880,
+  "products": [
+    {
+      "name": "Basic ONU",
+      "price": 81.0,
+      "cost": 60,
+      "description": "Entry-level ONU device"
+    }
+  ],
+  "content": "Basic marketing campaign",
+  "income": 0,
+  "expenses": 0,
+  "sales": 0,
+  "Updated_Yearly": true,
+  "rival_info": {},
+  "plan": "cost_leadership",
+  "analysis_portfolios": 0.6,
+  "score_product": 0.6,
+  "score_add": 0.6,
+  "market_analysis": {
+    "average_price": 81.0,
+    "profit_margin": 0.25925925925925924
+  },
+  "strategy_plan": {
+    "focus": "operational_efficiency",
+    "pricing_strategy": "competitive_pricing",
+    "market_approach": "mass_market",
+    "production_recommendation": "scale_up",
+    "next_steps": [
+      "Optimize production costs",
+      "Increase production volume",
+      "Expand market reach"
+    ]
+  }
+}
+
+Make decisions about:
+1. Product pricing (adjust current prices by a percentage)
+2. Marketing investments (allocate budget)
+3. R&D investments (allocate budget)
+
+Your response MUST be a valid JSON object with these exact keys:
+{
+    "price_adjustment": <float between -0.2 and 0.2>,
+    "marketing_budget": <integer between 10000 and 50000>,
+    "rd_budget": <integer between 10000 and 50000>
+}
+2025-05-29 15:34:40,082 - INFO - LLM Response:
+```json
+{
+    "price_adjustment": -0.05,
+    "marketing_budget": 30000,
+    "rd_budget": 20000
+}
+```
+2025-05-29 15:34:40,082 - INFO - ==================================================
+
+2025-05-29 15:34:40,082 - INFO - Vendor vendor1 made decision: {
+  "price_adjustment": -0.05,
+  "marketing_budget": 10000,
+  "rd_budget": 17902
+}
+2025-05-29 15:34:40,082 - INFO - Agent vendor2 used tool market_analysis
+2025-05-29 15:34:40,083 - INFO - Agent vendor2 used tool strategy_planning
+2025-05-29 15:34:40,263 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-29 15:34:46,725 - INFO - 
+==================================================
+2025-05-29 15:34:46,725 - INFO - Agent vendor2 LLM Conversation:
+2025-05-29 15:34:46,725 - INFO - System Prompt:
+You are a vendor agent in a competitive ONU device market.
+Your description: you are a Multinational Company onu manufacter
+Your current state:
+- Brand: Vendor2
+- Strategy: cost_focus
+- Current sales: 22889
+- Current cash flow: 4083105.0
+- Products: [
+  {
+    "name": "Premium ONU",
+    "price": 171.0,
+    "cost": 120,
+    "description": "High-end ONU device"
+  }
+]
+
+Make decisions to maximize your market share and profitability.
+2025-05-29 15:34:46,725 - INFO - Decision Prompt:
+Based on your current state and the following market conditions:
+{
+  "description": "you are a Multinational Company onu manufacter",
+  "brand": "Vendor2",
+  "fix_cost": 1200000,
+  "variable_cost": 60000,
+  "capital": 1200000,
+  "cash_flow": 4083105.0,
+  "salary_rd": 69600,
+  "salary_maketing": 48480,
+  "products": [
+    {
+      "name": "Premium ONU",
+      "price": 171.0,
+      "cost": 120,
+      "description": "High-end ONU device"
+    }
+  ],
+  "content": "Premium marketing campaign",
+  "income": 0,
+  "expenses": 0,
+  "sales": 22889,
+  "Updated_Yearly": true,
+  "rival_info": {},
+  "plan": "cost_focus",
+  "analysis_portfolios": 0.7,
+  "score_product": 0.7,
+  "score_add": 0.7,
+  "market_analysis": {
+    "average_price": 171.0,
+    "profit_margin": 0.2982456140350877
+  },
+  "strategy_plan": {
+    "focus": "product_differentiation",
+    "pricing_strategy": "value_based_pricing",
+    "market_approach": "niche_market",
+    "production_recommendation": "quality_over_quantity",
+    "next_steps": [
+      "Enhance product features",
+      "Target specific customer segments",
+      "Invest in brand development"
+    ]
+  }
+}
+
+Make decisions about:
+1. Product pricing (adjust current prices by a percentage)
+2. Marketing investments (allocate budget)
+3. R&D investments (allocate budget)
+
+Your response MUST be a valid JSON object with these exact keys:
+{
+    "price_adjustment": <float between -0.2 and 0.2>,
+    "marketing_budget": <integer between 10000 and 50000>,
+    "rd_budget": <integer between 10000 and 50000>
+}
+2025-05-29 15:34:46,726 - INFO - LLM Response:
+```json
+{
+    "price_adjustment": -0.05,
+    "marketing_budget": 40000,
+    "rd_budget": 30000
+}
+```
+2025-05-29 15:34:46,726 - INFO - ==================================================
+
+2025-05-29 15:34:46,726 - INFO - Vendor vendor2 made decision: {
+  "price_adjustment": -0.05,
+  "marketing_budget": 200000,
+  "rd_budget": 200000
+}
+2025-05-29 15:34:46,726 - INFO - Buyer isp1 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 6784, 'min_quality_score': 0.7}
+2025-05-29 15:34:46,726 - INFO - Buyer isp2 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 5312, 'min_quality_score': 0.7}
+2025-05-29 15:34:46,726 - INFO - Buyer isp3 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 3899, 'min_quality_score': 0.7}
+2025-05-29 15:34:46,726 - INFO - Buyer isp4 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 68, 'min_quality_score': 0.7}
+2025-05-29 15:34:46,726 - INFO - Buyer isp5 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 81, 'min_quality_score': 0.7}
+2025-05-29 15:34:46,726 - INFO - Buyer isp6 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 109, 'min_quality_score': 0.7}
+2025-05-29 15:34:46,726 - INFO - Buyer isp7 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 40, 'min_quality_score': 0.7}
+2025-05-29 15:34:46,727 - INFO - Buyer isp8 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 119, 'min_quality_score': 0.7}
+2025-05-29 15:34:46,727 - INFO - Buyer isp9 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 93, 'min_quality_score': 0.7}
+2025-05-29 15:34:46,727 - INFO - Buyer isp10 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 78, 'min_quality_score': 0.7}
+2025-05-29 15:34:46,727 - INFO - Buyer isp11 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 71, 'min_quality_score': 0.7}
+2025-05-29 15:34:46,727 - INFO - Buyer isp12 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 123, 'min_quality_score': 0.7}
+2025-05-29 15:34:46,727 - INFO - Completed step 3/6
+2025-05-29 15:34:46,727 - INFO - Running step 4/6
+2025-05-29 15:34:46,727 - INFO - Agent vendor1 used tool market_analysis
+2025-05-29 15:34:46,728 - INFO - Agent vendor1 used tool strategy_planning
+2025-05-29 15:34:46,903 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-29 15:34:52,407 - INFO - 
+==================================================
+2025-05-29 15:34:52,407 - INFO - Agent vendor1 LLM Conversation:
+2025-05-29 15:34:52,407 - INFO - System Prompt:
+You are a vendor agent in a competitive ONU device market.
+Your description: you are a Born Global Company onu manufacter
+Your current state:
+- Brand: Vendor1
+- Strategy: cost_leadership
+- Current sales: 0
+- Current cash flow: -48882.0
+- Products: [
+  {
+    "name": "Basic ONU",
+    "price": 76.95,
+    "cost": 60,
+    "description": "Entry-level ONU device"
+  }
+]
+
+Make decisions to maximize your market share and profitability.
+2025-05-29 15:34:52,407 - INFO - Decision Prompt:
+Based on your current state and the following market conditions:
+{
+  "description": "you are a Born Global Company onu manufacter",
+  "brand": "Vendor1",
+  "fix_cost": 100000,
+  "variable_cost": 50000,
+  "capital": 1000000,
+  "cash_flow": -48882.0,
+  "salary_rd": 17902,
+  "salary_maketing": 10000,
+  "products": [
+    {
+      "name": "Basic ONU",
+      "price": 76.95,
+      "cost": 60,
+      "description": "Entry-level ONU device"
+    }
+  ],
+  "content": "Basic marketing campaign",
+  "income": 0,
+  "expenses": 0,
+  "sales": 0,
+  "Updated_Yearly": true,
+  "rival_info": {},
+  "plan": "cost_leadership",
+  "analysis_portfolios": 0.6,
+  "score_product": 0.6,
+  "score_add": 0.6,
+  "market_analysis": {
+    "average_price": 76.95,
+    "profit_margin": 0.22027290448343081
+  },
+  "strategy_plan": {
+    "focus": "operational_efficiency",
+    "pricing_strategy": "competitive_pricing",
+    "market_approach": "mass_market",
+    "production_recommendation": "scale_up",
+    "next_steps": [
+      "Optimize production costs",
+      "Increase production volume",
+      "Expand market reach"
+    ]
+  }
+}
+
+Make decisions about:
+1. Product pricing (adjust current prices by a percentage)
+2. Marketing investments (allocate budget)
+3. R&D investments (allocate budget)
+
+Your response MUST be a valid JSON object with these exact keys:
+{
+    "price_adjustment": <float between -0.2 and 0.2>,
+    "marketing_budget": <integer between 10000 and 50000>,
+    "rd_budget": <integer between 10000 and 50000>
+}
+2025-05-29 15:34:52,407 - INFO - LLM Response:
+```json
+{
+    "price_adjustment": -0.05,
+    "marketing_budget": 30000,
+    "rd_budget": 20000
+}
+```
+2025-05-29 15:34:52,408 - INFO - ==================================================
+
+2025-05-29 15:34:52,408 - INFO - Vendor vendor1 made decision: {
+  "price_adjustment": -0.05,
+  "marketing_budget": 10000,
+  "rd_budget": 15111
+}
+2025-05-29 15:34:52,408 - INFO - Agent vendor2 used tool market_analysis
+2025-05-29 15:34:52,408 - INFO - Agent vendor2 used tool strategy_planning
+2025-05-29 15:34:52,583 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-29 15:34:58,119 - INFO - 
+==================================================
+2025-05-29 15:34:58,119 - INFO - Agent vendor2 LLM Conversation:
+2025-05-29 15:34:58,119 - INFO - System Prompt:
+You are a vendor agent in a competitive ONU device market.
+Your description: you are a Multinational Company onu manufacter
+Your current state:
+- Brand: Vendor2
+- Strategy: cost_focus
+- Current sales: 16777
+- Current cash flow: 4654743.05
+- Products: [
+  {
+    "name": "Premium ONU",
+    "price": 162.45,
+    "cost": 120,
+    "description": "High-end ONU device"
+  }
+]
+
+Make decisions to maximize your market share and profitability.
+2025-05-29 15:34:58,119 - INFO - Decision Prompt:
+Based on your current state and the following market conditions:
+{
+  "description": "you are a Multinational Company onu manufacter",
+  "brand": "Vendor2",
+  "fix_cost": 1200000,
+  "variable_cost": 60000,
+  "capital": 1200000,
+  "cash_flow": 4654743.05,
+  "salary_rd": 200000,
+  "salary_maketing": 200000,
+  "products": [
+    {
+      "name": "Premium ONU",
+      "price": 162.45,
+      "cost": 120,
+      "description": "High-end ONU device"
+    }
+  ],
+  "content": "Premium marketing campaign",
+  "income": 0,
+  "expenses": 0,
+  "sales": 16777,
+  "Updated_Yearly": true,
+  "rival_info": {},
+  "plan": "cost_focus",
+  "analysis_portfolios": 0.7,
+  "score_product": 0.7,
+  "score_add": 0.7,
+  "market_analysis": {
+    "average_price": 162.45,
+    "profit_margin": 0.26131117266851334
+  },
+  "strategy_plan": {
+    "focus": "product_differentiation",
+    "pricing_strategy": "value_based_pricing",
+    "market_approach": "niche_market",
+    "production_recommendation": "quality_over_quantity",
+    "next_steps": [
+      "Enhance product features",
+      "Target specific customer segments",
+      "Invest in brand development"
+    ]
+  }
+}
+
+Make decisions about:
+1. Product pricing (adjust current prices by a percentage)
+2. Marketing investments (allocate budget)
+3. R&D investments (allocate budget)
+
+Your response MUST be a valid JSON object with these exact keys:
+{
+    "price_adjustment": <float between -0.2 and 0.2>,
+    "marketing_budget": <integer between 10000 and 50000>,
+    "rd_budget": <integer between 10000 and 50000>
+}
+2025-05-29 15:34:58,119 - INFO - LLM Response:
+```json
+{
+    "price_adjustment": -0.05,
+    "marketing_budget": 40000,
+    "rd_budget": 30000
+}
+```
+2025-05-29 15:34:58,119 - INFO - ==================================================
+
+2025-05-29 15:34:58,119 - INFO - Vendor vendor2 made decision: {
+  "price_adjustment": -0.05,
+  "marketing_budget": 200000,
+  "rd_budget": 200000
+}
+2025-05-29 15:34:58,119 - INFO - Buyer isp1 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 7513, 'min_quality_score': 0.7}
+2025-05-29 15:34:58,119 - INFO - Buyer isp2 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 5875, 'min_quality_score': 0.7}
+2025-05-29 15:34:58,120 - INFO - Buyer isp3 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 4306, 'min_quality_score': 0.7}
+2025-05-29 15:34:58,120 - INFO - Buyer isp4 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 75, 'min_quality_score': 0.7}
+2025-05-29 15:34:58,120 - INFO - Buyer isp5 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 90, 'min_quality_score': 0.7}
+2025-05-29 15:34:58,120 - INFO - Buyer isp6 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 120, 'min_quality_score': 0.7}
+2025-05-29 15:34:58,120 - INFO - Buyer isp7 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 44, 'min_quality_score': 0.7}
+2025-05-29 15:34:58,120 - INFO - Buyer isp8 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 132, 'min_quality_score': 0.7}
+2025-05-29 15:34:58,120 - INFO - Buyer isp9 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 103, 'min_quality_score': 0.7}
+2025-05-29 15:34:58,120 - INFO - Buyer isp10 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 86, 'min_quality_score': 0.7}
+2025-05-29 15:34:58,120 - INFO - Buyer isp11 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 79, 'min_quality_score': 0.7}
+2025-05-29 15:34:58,120 - INFO - Buyer isp12 made decision: {'selected_vendor': 'vendor2', 'purchase_quantity': 137, 'min_quality_score': 0.7}
+2025-05-29 15:34:58,121 - INFO - Completed step 4/6
+2025-05-29 15:34:58,121 - INFO - Running step 5/6
+2025-05-29 15:34:58,121 - INFO - Agent vendor1 used tool market_analysis
+2025-05-29 15:34:58,121 - INFO - Agent vendor1 used tool strategy_planning
+2025-05-29 15:34:58,298 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
